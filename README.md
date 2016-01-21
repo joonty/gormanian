@@ -21,7 +21,7 @@ $ rake install
 
 ## Usage
 
-```
+```ruby
 require "gormanian/date"
 
 # Uses gormanian calendar
