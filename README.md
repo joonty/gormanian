@@ -6,7 +6,7 @@ Provides a Ruby Date-like library for the Gormanian calendar. Here are some expl
 
 1. https://www.youtube.com/watch?v=EcMTHr3TqA0
 2. http://gormano.blogspot.co.uk/2008/01/problem-solving.html
-
+3. http://slides.com/elaptics/gormanic#/1
 
 ## Installation
 
@@ -24,9 +24,25 @@ $ rake install
 ```
 require "gormanian/date"
 
+# Uses gormanian calendar
 date = Gormanian::Date.today
-date = Gormanian::Date.from_gregorian_date(Date.new(2016, 1, 1))
-date.sunday?
+date.to_s          #=> "21 March, 2016"  (Gregorian date is 21 Jan, 2016)
+date.day           #=> "21"
+date.month         #=> "1"
+date.month_name    #=> "March"
+date.day_name      #=> "Saturday"
+date.saturday?     #=> true
+date.intermission? #=> false
+
+# Can add days to get a new date
+next_date = date + 1
+next_date.to_s     #=> "22 March, 2016"
+
+# Handles intermission
+intermission_date = Gormanian::Date.from_gregorian_date(Date.new(2015, 12, 31))
+intermission_date.intermission? #=> true
+intermission_date.to_s #=> "Intermission, 2015"
+
 ```
 
 ## Development
@@ -37,7 +53,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/gorman. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/joonty/gormanian. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License
